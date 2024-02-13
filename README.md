@@ -40,7 +40,7 @@ Setup Instructions
 API Endpoints
 - Gateways:
     - `GET /api/gateways`: Get all gateways
-    - `GET /api/gateways/{Id}`: Get gateway by Id
+    - `GET /api/gateways/{id}`: Get gateway by Id
     - `POST /api/gateways`: Create a new gateway
     - `PUT /api/gateways/{id}`: Update an existing gateway
     - `PATCH /api/gateways/{id}`: Update a particular field of gateway
@@ -67,5 +67,6 @@ Assumptions
 3. When doing Patch mapping, in peripheral devices I assumed that update only the vendor and in gateway update only the name.
    
 ER Diagram
+
  ![image](https://github.com/RavinduLK/NMS-TechVenturas/assets/94894276/769013c7-03de-4d2d-a52f-95b83d44d1f6)
 
