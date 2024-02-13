@@ -20,7 +20,7 @@ Setup Instructions
     ```
 
 2. Database Configuration:
-    - Install PostgreSQL and create a new database named `tech_venturas_db`.
+    - Install MySQL and create a new database named `tech_venturas_db`.
     - Update the `application.properties` file with your database credentials:
         ```properties
         spring.datasource.url=jdbc:mysql://localhost:3306/tech_venturas_db
