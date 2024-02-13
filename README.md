@@ -23,10 +23,10 @@ Setup Instructions
     - Install PostgreSQL and create a new database named `tech_venturas_db`.
     - Update the `application.properties` file with your database credentials:
         ```properties
-spring.datasource.url=jdbc:mysql://localhost:3306/tech_venturas_db
-spring.datasource.username=your_username
-spring.datasource.password=your_password        
-
+        spring.datasource.url=jdbc:mysql://localhost:3306/tech_venturas_db
+        spring.datasource.username=your_username
+        spring.datasource.password=your_password        
+      ```
 3. Build and Run the Application:
     ```bash
     cd tech-venturas-api
