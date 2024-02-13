@@ -2,6 +2,7 @@ package NMSTechVenturas.example.NMSTechVenturas.controller;
 
 import NMSTechVenturas.example.NMSTechVenturas.model.Device;
 import NMSTechVenturas.example.NMSTechVenturas.services.DeviceService;
+import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -20,16 +21,19 @@ public class DeviceController {
         this.deviceService = deviceService;
     }
 
+    //Creating the Device
     @PostMapping("/devices")
-    public Device createDevice(@RequestBody Device device) {
+    public Device createDevice(@Valid @RequestBody Device device) {
         return deviceService.createDevice(device);
     }
 
+    //Retrieving all the Devices
     @GetMapping("/devices")
     public List<Device> getAllDevices() {
         return deviceService.getAllDevices();
     }
 
+    //Deleting the Devices
     @DeleteMapping("/devices/{id}")
     public ResponseEntity<Map<String,Boolean>> deleteDevice(@PathVariable Long id) {
         boolean deleted = false;
@@ -39,6 +43,7 @@ public class DeviceController {
         return ResponseEntity.ok(response);
     }
 
+    //Getting the Device by Id
     @GetMapping("/devices/{id}")
     public ResponseEntity<Device> getDeviceById(@PathVariable Long id) {
         Device device = null;
@@ -46,12 +51,14 @@ public class DeviceController {
         return ResponseEntity.ok(device);
     }
 
+    //Updating the Device based on Id
     @PutMapping("/devices/{id}")
     public ResponseEntity<Device> updateDevice(@PathVariable Long id, @RequestBody Device device) {
         device = deviceService.updateDevice(id, device);
         return ResponseEntity.ok(device);
     }
 
+    //Updating only the vendor of the Device : Assumption
     @PatchMapping("/devices/{id}")
     public ResponseEntity<Device> vendorUpdateDevice(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         Device updatedDevice = deviceService.vendorUpdateDevice(id, updates);

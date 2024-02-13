@@ -1,6 +1,5 @@
 package NMSTechVenturas.example.NMSTechVenturas.controller;
 
-import NMSTechVenturas.example.NMSTechVenturas.model.Device;
 import NMSTechVenturas.example.NMSTechVenturas.model.Gateway;
 import NMSTechVenturas.example.NMSTechVenturas.services.GatewayService;
 import org.springframework.http.ResponseEntity;
@@ -20,16 +19,19 @@ public class GatewayController {
         this.gatewayService = gatewayService;
     }
 
+    //Creating the Gateway
     @PostMapping("/gateways")
     public Gateway createGateway(@RequestBody Gateway gateway) {
         return gatewayService.createGateway(gateway);
     }
 
+    //Retrieving all the Gateways
     @GetMapping("/gateways")
     public List<Gateway> getAllGateways() {
         return gatewayService.getAllGateways();
     }
 
+    //Deleting the Gateway
     @DeleteMapping("/gateways/{id}")
     public ResponseEntity<Map<String,Boolean>> deleteGateway(@PathVariable Long id) {
         boolean deleted = false;
@@ -39,6 +41,7 @@ public class GatewayController {
         return ResponseEntity.ok(response);
     }
 
+    //Getting the Gateway by Id
     @GetMapping("/gateways/{id}")
     public ResponseEntity<Gateway> getGatewayById(@PathVariable Long id) {
         Gateway gateway = null;
@@ -46,16 +49,17 @@ public class GatewayController {
         return ResponseEntity.ok(gateway);
     }
 
+    //Updating the Gateway based on Id
     @PutMapping("/gateways/{id}")
     public ResponseEntity<Gateway> updateGateway(@PathVariable Long id, @RequestBody Gateway gateway) {
         gateway = gatewayService.updateGateway(id, gateway);
         return ResponseEntity.ok(gateway);
     }
 
+    //Updating only the name of the Gateway : Assumption
     @PatchMapping("/gateways/{id}")
     public ResponseEntity<Gateway> nameUpdateGateway(@PathVariable Long id, @RequestBody Map<String, Object> updates) {
         Gateway updatedGateway = gatewayService.nameUpdateGateway(id, updates);
         return ResponseEntity.ok(updatedGateway);
     }
-
 }

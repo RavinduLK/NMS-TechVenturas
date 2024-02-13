@@ -5,6 +5,7 @@ import NMSTechVenturas.example.NMSTechVenturas.model.Device;
 import java.util.List;
 import java.util.Map;
 
+//Interface for the services
 public interface DeviceService {
     Device createDevice(Device device);
 

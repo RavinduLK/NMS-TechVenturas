@@ -19,14 +19,23 @@ public class DeviceServiceImpl implements DeviceService {
         this.deviceRepository = deviceRepository;
     }
 
+    //Implementation of create Device method
     @Override
     public Device createDevice(Device device) {
         DeviceEntity deviceEntity = new DeviceEntity();
         BeanUtils.copyProperties(device,deviceEntity);
+
+        if (device.getGatewayId() != null) {
+            GatewayEntity gatewayEntity = new GatewayEntity();
+            gatewayEntity.setId(device.getGatewayId());
+            deviceEntity.setGateway(gatewayEntity);
+        }
+
         deviceRepository.save(deviceEntity);
         return device;
     }
 
+    //Implementation of get all devices method
     @Override
     public List<Device> getAllDevices() {
         List<DeviceEntity> deviceEntities
@@ -34,15 +43,20 @@ public class DeviceServiceImpl implements DeviceService {
 
         List<Device> devices = deviceEntities
                 .stream()
-                .map(dev -> new Device(
-                        dev.getId(),
-                        dev.getVendor(),
-                        dev.getDateCreated(),
-                        dev.getStatus()))
+                .map(dev -> {
+                    Long gatewayId = dev.getGateway() != null ? dev.getGateway().getId() : null;
+                    return new Device(
+                            dev.getId(),
+                            dev.getVendor(),
+                            dev.getDateCreated(),
+                            dev.getStatus(),
+                            gatewayId);
+                })
                 .collect(Collectors.toList());
         return devices;
     }
 
+    //Implementation of delete device method
     @Override
     public boolean deleteDevice(Long id) {
         DeviceEntity device = deviceRepository.findById(id).get();
@@ -50,6 +64,7 @@ public class DeviceServiceImpl implements DeviceService {
         return true;
     }
 
+    //Implementation of get device by Id method
     @Override
     public Device getDeviceById(Long id) {
         DeviceEntity deviceEntity
@@ -59,6 +74,7 @@ public class DeviceServiceImpl implements DeviceService {
         return device;
     }
 
+    //Implementation of update Device method
     @Override
     public Device updateDevice(Long id, Device device) {
         DeviceEntity deviceEntity
@@ -66,10 +82,18 @@ public class DeviceServiceImpl implements DeviceService {
         deviceEntity.setVendor(device.getVendor());
         deviceEntity.setDateCreated(device.getDateCreated());
         deviceEntity.setStatus(device.getStatus());
+
+        if (device.getGatewayId() != null) {
+            GatewayEntity gatewayEntity = new GatewayEntity();
+            gatewayEntity.setId(device.getGatewayId());
+            deviceEntity.setGateway(gatewayEntity);
+        }
+
         deviceRepository.save(deviceEntity);
         return device;
     }
 
+    //Implementation of vendor update Device method
     @Override
     public Device vendorUpdateDevice(Long id, Map<String, Object> updates) {
         DeviceEntity deviceEntity
