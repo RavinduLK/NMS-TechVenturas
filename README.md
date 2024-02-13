@@ -40,29 +40,31 @@ Setup Instructions
 API Endpoints
 - Gateways:
     - `GET /api/gateways`: Get all gateways
-    - `GET /api/gateways/{serialNumber}`: Get gateway by serial number
+    - `GET /api/gateways/{Id}`: Get gateway by Id
     - `POST /api/gateways`: Create a new gateway
-    - `PUT /api/gateways/{serialNumber}`: Update an existing gateway
-    - `DELETE /api/gateways/{serialNumber}`: Delete a gateway
+    - `PUT /api/gateways/{id}`: Update an existing gateway
+    - `PATCH /api/gateways/{id}`: Update a particular field of gateway
+    - `DELETE /api/gateways/{id}`: Delete a gateway
 
 - Peripheral Devices:
-    - `GET /api/peripheral-devices`: Get all peripheral devices
-    - `GET /api/peripheral-devices/{uid}`: Get peripheral device by UID
-    - `POST /api/peripheral-devices`: Create a new peripheral device
-    - `PUT /api/peripheral-devices/{uid}`: Update an existing peripheral device
-    - `DELETE /api/peripheral-devices/{uid}`: Delete a peripheral device
+    - `GET /api/devices`: Get all peripheral devices
+    - `GET /api/devices/{id}`: Get peripheral device by Id
+    - `POST /api/devices`: Create a new peripheral device
+    - `PUT /api/devices/{id}`: Update an existing peripheral device
+    - `PATCH /api/devices/{id}`: Update a particular field of peripheral device
+    - `DELETE /api/devices/{id}`: Delete a peripheral device
 
  Validation
-- Validation of input fields, including IPv4 address validation, is implemented for gateways and peripheral devices.
+- Validation of input fields, including IPv4 address validation, is implemented for gateways.
 - Constraints such as the maximum number of peripheral devices allowed for a gateway (10) are enforced.
 
 Testing
-- Unit tests are provided for each endpoint using Postman
+- Unit tests are provided for each endpoint using Postman.
   
 Assumptions
-1. Peripheral devices can only be associated with one gateway at a time.
+1. Peripheral devices can be only associated with one gateway at a time.
 2. One gateway can have only 10 peripheral devices.
-3. When doing Patch mapping in peripheral devices update only vendor and in gateway update only the name.
+3. When doing Patch mapping, in peripheral devices I assumed that update only the vendor and in gateway update only the name.
    
 ER Diagram
  ![image](https://github.com/RavinduLK/NMS-TechVenturas/assets/94894276/769013c7-03de-4d2d-a52f-95b83d44d1f6)
